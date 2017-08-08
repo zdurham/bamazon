@@ -68,7 +68,7 @@ function lowInv() {
     if (err) throw err;
     console.log("Here is a list of low inventory products\n")
     res.forEach(function(row) {
-      console.log("| Item Id: " + row.item_id + " | Department: " + row.department_name + " | Item: " + row.product_name + " | Price: $" + row.price + "\n")
+      console.log("| Item Id: " + row.item_id + " | Department: " + row.department_name + " | Item: " + row.product_name + " | Price: $" + row.price)
     })
   menu();
   })
@@ -78,18 +78,25 @@ function addInv() {
   connection.query("SELECT * FROM products", function(err, res) {
     if (err) throw err;
     res.forEach(function(row) {
-      var item = ("| Item Id: " + row.item_id + " | Department: " + row.department_name + " | Item: " + row.product_name + " | Price: $" + row.price)
+      console.log("| Item Id: " + row.item_id + " | Department: " + row.department_name + " | Item: " + row.product_name + " | Price: $" + row.price)
     })
     inquirer.prompt([
       {
         "name": "item_selection",
         "message": "To add inventory or an item, select the item by typing in the item id below.",
         "type": "input"
+      },
+      {
+        "name": "quantity",
+        "message": "How much inventory would you like to add?",
+        "type": "input"
       }
     ]).then(function(answer) {
-      
+      connection.query(`UPDATE products SET stock_quantity=stock_quantity + ${answer.quantity} WHERE item_id=${answer.item_selection}`, function(err, res) {
+        console.log("You have added " + answer.quantity + " stock to the selected item.\n")
+        menu();
+      })
     })
-    
   })
 }
 
