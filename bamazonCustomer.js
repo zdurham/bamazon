@@ -1,5 +1,7 @@
 const mysql = require('mysql');
 const inquirer = require('inquirer');
+let Table = require('cli-table')
+
 
 // Database credentials
 var connection = mysql.createConnection({
@@ -11,40 +13,77 @@ var connection = mysql.createConnection({
 // Function to establish connection to the database
 connection.connect(function(err) {
   if (err) throw err;
-
   // Use a query to get database information, and then display it in an aesthetically pleasing way
-  startMenu()
-  
+  startMenu();
 })
 
 
 // FUNCTION to display initial list and ask query
 function startMenu() {
-  console.log("Welcome to the Bamazon store! Below is a list of products that we currently offfer.")
-  connection.query("SELECT * FROM products", function(err, res) {
-    if (err) throw err;
-    // Display section
-    console.log("| List of Bamazon Products \n")
-    res.forEach(function(row) {
-      console.log("| Item Id: " + row.item_id + " | Department: " + row.department_name + " | Item: " + row.product_name + " | Price: $" + row.price)
-    })
-  select();
+  inquirer.prompt([
+    {
+      "name": "action",
+      "message": "Welcome to Bamazon, valued customer! Please select an option below to begin",
+      "type": "list",
+      "choices": ["Buy an item", "Exit"]
+    }
+  ]).then(function(answer) {
+    switch (answer.action) {
+      case "Buy an item":
+        select();
+        break;
+      case "Exit":
+        console.log("Exiting the program")
+        connection.end()
+        break;
+    }
   })
 }
 
 // FUNCTION to select an item
 function select() {
-  inquirer.prompt([
+  console.log("Welcome to the Bamazon store! Below is a list of products that we currently offfer.")
+  connection.query("SELECT * FROM products", function(err, res) {
+    if (err) throw err;
+    let itemArr = []
+    let table = new Table({
+      head: ['Product ID', 'Product Name', 'Price', 'Stock', 'Department'],
+      color: ["blue"],
+      colAligns: ["center"]
+    })
+    res.forEach(function(row) {
+      let newRow = [row.item_id, row.product_name, "$" + row.price, row.stock_quantity, row.department_name]
+      table.push(newRow)
+      itemArr.push(row.item_id)
+    })
+    console.log("\n" + table.toString())
+
+    inquirer.prompt([
     {
       "name": "id",
       "message": "To purchase an item, please type the item id below.",
-      "type": "input"
-      // Add number validation later
+      "type": "input",
+      "validate": function(input) {
+        if (Number.isInteger(parseInt(input)) === true && (itemArr.indexOf(parseFloat(input)) !== -1)) {
+          return true
+        }
+        else {
+          console.log("\nPlease enter a valid item ID to continue.")
+        }
+      }
     },
     {
       "name": "quantity",
       "message": "How many of this item would you like to buy?",
-      "type": "input"
+      "type": "input",
+      "validate": function(input) {
+        if (Number.isInteger(parseInt(input)) === true) {
+          return true
+        }
+        else {
+          console.log("\nPlease enter a number.")
+        }
+      }
       // Add number validation later
     }
   ]).then(function(answer) {
@@ -63,9 +102,11 @@ function select() {
       // If new quantity is less that 0, then insufficient stock is available, and the user is redirected back to the select screen.
       else {
         console.log("Sorry, but we have insufficient stock to fulfill your order. You requested " + quantity + " of this item, but we only have " + selection.stock_quantity + " in stock. Returning to the item list now.")
+        // Back to menu
         startMenu();
       }
     })
+  })
   })
 }
 
@@ -86,6 +127,7 @@ function buyItem(item, quantity) {
           console.log("Your order was placed successfully!")
           console.log("Your total charge is: " + sales)
           console.log("Returning you now to the item menu.")
+          // Back to menu
           startMenu();
         }) 
       }) 

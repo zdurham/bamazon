@@ -55,7 +55,9 @@ function viewSales() {
       table.push(newRow)
     })
     console.log("\n" + table.toString())
+    menu();
   })
+  
 }
 
 function newDept() {

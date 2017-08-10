@@ -5,6 +5,7 @@
 
 const mysql = require('mysql');
 const inquirer = require('inquirer');
+let Table = require('cli-table')
 
 // Database credentials
 var connection = mysql.createConnection({
@@ -55,33 +56,58 @@ function menu() {
 function list() {
   connection.query("SELECT * FROM products", function(err, res) {
     if (err) throw err;
-    // Display section
-    console.log("\n| List of Current Products \n")
-    res.forEach(function(row) {
-      console.log("| Item Id: " + row.item_id + " | Department: " + row.department_name + " | Item: " + row.product_name + " | Price: $" + row.price + "\n")
+    let table = new Table({
+      head: ['Product ID', 'Product Name', 'Price', 'Stock', 'Department'],
+      color: ["blue"],
+      colAligns: ["center"]
     })
-  menu();
+    res.forEach(function(row) {
+      let newRow = [row.item_id, row.product_name, "$" + row.price, row.stock_quantity, row.department_name]
+      table.push(newRow)
+    })
+    console.log("Current Bamazon Products")
+    console.log("\n" + table.toString())
+    menu();
   })
 }
+
 // FUNCTION to view a list of low inventory products (<5 quantity)
 function lowInv() {
   var query = "SELECT * FROM products WHERE stock_quantity < 5"
   connection.query(query, function(err, res) {
     if (err) throw err;
+    let table = new Table({
+      head: ['Product ID', 'Product Name', 'Price', 'Stock', 'Department'],
+      color: ["blue"],
+      colAligns: ["center"]
+    })
     console.log("Here is a list of low inventory products\n")
     res.forEach(function(row) {
-      console.log("| Item Id: " + row.item_id + " | Department: " + row.department_name + " | Item: " + row.product_name + " | Price: $" + row.price + " | Invenvory: " + row.stock_quantity)
+      let newRow = [row.item_id, row.product_name, "$" + row.price, row.stock_quantity, row.department_name]
+      table.push(newRow)
     })
+    console.log("\n" + table.toString())
   menu();
   })
 }
+
+
 // FUNCTION to update the quantity of any given product
 function addInv() {
   connection.query("SELECT * FROM products", function(err, res) {
     if (err) throw err;
-    res.forEach(function(row) {
-      console.log("| Item Id: " + row.item_id + " | Department: " + row.department_name + " | Item: " + row.product_name + " | Price: $" + row.price + " | Invenvory: " + row.stock_quantity)
+    let table = new Table({
+      head: ['Product ID', 'Product Name', 'Price', 'Department'],
+      color: ["blue"],
+      colAligns: ["center"]
     })
+    res.forEach(function(row) {
+      let newRow = [row.item_id, row.product_name, row.price, row.stock_quantity, row.department_name]
+      table.push(newRow)
+    })
+    console.log("Current Bamazon Products")
+    console.log("\n" + table.toString())
+    
     inquirer.prompt([
       {
         "name": "item_selection",
@@ -103,6 +129,7 @@ function addInv() {
 }
 
 function addProd() {
+  // Grabbing department data so that they can be used as options in the department answer. This way, no non-existing departments can be created.
   connection.query("SELECT * FROM departments", function(err, res) {
     if (err) throw err;
     let departmentArr = [];
@@ -151,5 +178,5 @@ function addProd() {
       })
     })
   })
-
 }
+
