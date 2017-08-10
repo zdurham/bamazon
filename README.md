@@ -56,3 +56,16 @@ Like with the other options, the user is sent back to the main menu at the end o
  
 ## Supervisor View
 To begin the program with the supervisor view, type `node bamazonSupervisor.js` into the terminal.
+
+The initial prompt should look like this: 
+[image here]
+
+The first option for the user is "View Department by Product Sales." This will generate a table displaying each department, along with their respective overhead costs, total sales for each department, and overall what the total profit/loss is for each department. This is what that output looks like:
+
+![view departments](https://github.com/zdurham/bamazon/blob/master/img/view-departments.png)
+
+Once this table has been printed to the console, the user will be returned back to the main menu.
+
+The second option, "Create Department," allows the user to create a new department. It follows the same kind of flow as the manager's "Add New Product." The user will be asked to provide a department name and the overhead costs of the department.
+
+
