@@ -1,5 +1,5 @@
-var mysql = require('mysql');
-var inquirer = require('inquirer');
+const mysql = require('mysql');
+const inquirer = require('inquirer');
 
 // Database credentials
 var connection = mysql.createConnection({
@@ -26,7 +26,7 @@ function startMenu() {
     // Display section
     console.log("| List of Bamazon Products \n")
     res.forEach(function(row) {
-      console.log("| Item Id: " + row.item_id + " | Department: " + row.department_name + " | Item: " + row.product_name + " | Price: $" + row.price + "\n")
+      console.log("| Item Id: " + row.item_id + " | Department: " + row.department_name + " | Item: " + row.product_name + " | Price: $" + row.price)
     })
   select();
   })
@@ -71,11 +71,25 @@ function select() {
 
 // FUNCTION to actually buy the item
 function buyItem(item, quantity) {
-  connection.query("UPDATE products SET ? WHERE ?", [{stock_quantity: (item.stock_quantity - quantity)},{product_name: item.product_name}], function(err, res) {
+  connection.query(`UPDATE products SET stock_quantity=(${parseFloat(item.stock_quantity)} - ${parseFloat(quantity)}), product_sales=(product_sales + (${parseFloat(item.price)} * ${parseFloat(quantity)})) WHERE item_id=${item.item_id}`, function(err, res) {
     if (err) throw err;
-    console.log("Your order was placed successfully!")
-    console.log("Your total charge is: " + (item.price * quantity))
-    console.log("Returning you now to the item menu.")
-    var delay = setTimeout(startMenu, 3000)
+    let sales = (item.price * quantity)
+    //--------------------------- Function to add to department product_sales column ------------------------------------//
+    connection.query(`SELECT department_name FROM products WHERE item_id=${item.item_id}`, function(err, res) {
+      if (err) throw err;
+      let department = res[0].department_name
+      connection.query(`SELECT product_sales FROM departments WHERE department_name="${department}"`, function(err, res) {
+        let totalSale = res[0].product_sales;
+        totalSale = parseFloat(totalSale) + parseFloat(sales);
+        connection.query(`UPDATE departments SET product_sales=${totalSale} WHERE department_name="${department}"`, function(err, res) {
+          if (err) throw err;
+          console.log("Your order was placed successfully!")
+          console.log("Your total charge is: " + sales)
+          console.log("Returning you now to the item menu.")
+          startMenu();
+        }) 
+      }) 
+    })
   })
 }
+

@@ -1,5 +1,4 @@
 USE bamazon;
-DROP TABLE products;
 
 CREATE TABLE products (
 	item_id INTEGER(11) AUTO_INCREMENT NOT NULL,
@@ -23,4 +22,20 @@ VALUES
 ("Field Notes 3 Pack", "Office Supplies", 15, 100),
 ("Laptop Charger", "Electronics", 50, 150);
 
+CREATE TABLE departments (
+  department_id INTEGER(11) AUTO_INCREMENT NOT NULL,
+  department_name VARCHAR(100) NOT NULL,
+  over_head_costs INTEGER(11) NOT NULL,
+  product_sales INTEGER(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (department_id)
+)
+
+INSERT INTO products (department_name, over_head_costs)
+VALUES 
+("Electronics", 20000),
+("Office Supplies", 16000),
+("Clothing", 24000),
+("Books", 14500);
+
 SELECT * FROM products;
+SELECT * FROM departments
