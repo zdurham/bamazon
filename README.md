@@ -19,11 +19,17 @@ This application uses a sql server to store data. After downloading/cloning this
 ## Customer View
 To begin the program with the customer view, type `node bamazonCustomer.js` into terminal. You should be presented with a table of current products and a prompt.
 
-[insert image here]
+![customer-prompt](https://github.com/zdurham/bamazon/blob/master/img/customer-prompt-snippet.png)
 
 To select an item, type in the item id of the item you wish to buy. You will then be presented with a second prompt asking for the quantity of that item. Both prompts only accept integer values.
 
-If the quantity you select does not exceed the current stock of the item, your request will be processed successfully, and your total charge will be displayed following the confirmation message. If your request does exceed the stock, the transaction will not complete, and you will be prompted to return to the initial menu.
+![item list](https://github.com/zdurham/bamazon/blob/master/img/customer-snippet2.png)
+
+If the quantity you select does not exceed the current stock of the item, your request will be processed successfully, and your total charge will be displayed following the confirmation message, like below: 
+
+![success](https://github.com/zdurham/bamazon/blob/master/img/customer-snipper3.png)
+
+If your request does exceed the stock, the transaction will not complete, and you will be prompted to return to the initial menu.
 
 To exit the program, select the exit option in the main menu prompt.
 
