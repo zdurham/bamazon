@@ -124,9 +124,10 @@ function buyItem(item, quantity) {
         totalSale = parseFloat(totalSale) + parseFloat(sales);
         connection.query(`UPDATE departments SET product_sales=${totalSale} WHERE department_name="${department}"`, function(err, res) {
           if (err) throw err;
-          console.log("Your order was placed successfully!")
-          console.log("Your total charge is: " + sales)
-          console.log("Returning you now to the item menu.")
+          console.log("\nYour order was placed successfully!")
+          console.log("Item: " + item.product_name)
+          console.log("Quantity: " + quantity)
+          console.log("Total cost: " + sales + "\n")
           // Back to menu
           startMenu();
         }) 
