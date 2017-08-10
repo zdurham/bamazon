@@ -36,10 +36,10 @@ CREATE TABLE departments (
 
 INSERT INTO departments (department_name, over_head_costs)
 VALUES 
-("Electronics", 20000),
-("Office Supplies", 16000),
-("Clothing", 24000),
-("Books", 14500);
+("Electronics", 10000),
+("Office Supplies", 2000),
+("Clothing", 4000),
+("Books", 3000);
 
 SELECT * FROM products;
 SELECT * FROM departments
