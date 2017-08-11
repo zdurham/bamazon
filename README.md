@@ -1,5 +1,7 @@
 # Bamazon
 ## Overview
+This application was created as my week 12 project for the UNC Coding Bootcamp.
+
 Bamazon is an interactive command-line-interface shopping application. It has three main applications:
 
   - **Customer View**
