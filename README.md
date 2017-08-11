@@ -46,9 +46,9 @@ The second option, "View Low Inventory Products," will allow you to see products
 
 ![low inventory](https://github.com/zdurham/bamazon/blob/master/img/low-inventory.png)
 
-After printing this table, the user is sent back to the main menu, where they can opt to add inventory to a particular item. This functionality is accomplished in the same way that a customer buys an item. A table of current products is printed, and the user must select by typing in the item_id. From there, the user inputs the desired quantity to add. 
+After printing this table, the user is sent back to the main menu, where they can opt to add inventory to a particular item. This functionality is accomplished in the same way that a customer buys an item. A table of current products is printed, and the user must select by typing in the item_id. From there, the user inputs the desired quantity to add. Here's an example of a successful addition:
 
-[insert image here]
+![add-stock](https://github.com/zdurham/bamazon/blob/master/img/add-stock.png)
 
 To add a brand new product to the list of currently available products, select the option "Add New Product." The user should be prompted to provide the name, department, price, and quantity to add of this item. Note, the user cannot create a new department from scratch here. They must select from a list of already availabile departments. To add a department, see the Supervisor view. A successful addition will look like this:
 
