@@ -18,6 +18,11 @@ This application uses the following packages:
 
 This application uses a sql server to store data. After downloading/cloning this repo, make sure to run the schema, bamazon.sql, from your command line to create the necessary database and tables to use with the application. There are values in the schema that will be inserted into the database to get you started.
 
+#### Video Demo
+Follow the link below to watch a video guide on how to use this application.
+
+[Demo Link to Youtube](https://www.youtube.com/watch?v=p3E1MxNsCbU&feature=youtu.be)
+
 ## Customer View
 To begin the program with the customer view, type `node bamazonCustomer.js` into terminal. You should be presented with a table of current products and a prompt.
 
