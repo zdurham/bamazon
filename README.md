@@ -23,6 +23,8 @@ Follow the link below to watch a video guide on how to use this application.
 
 [Demo Link to Youtube](https://www.youtube.com/watch?v=p3E1MxNsCbU&feature=youtu.be)
 
+(for best quality, make sure to set to 720p or 1080p, otherwise the text becomes very hard to read)
+
 ## Customer View
 To begin the program with the customer view, type `node bamazonCustomer.js` into terminal. You should be presented with a table of current products and a prompt.
 
