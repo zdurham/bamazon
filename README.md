@@ -8,24 +8,39 @@ Bamazon is an interactive command-line-interface shopping application. It has th
   - **Manager View**
   - **Supervisor View**
 
-### Dependencies and Setup
+## Table of Contents
+  - [Getting Started]()
+  - [Video Demo]()
+  - [Program Walkthrough]()
+    - [Customer View]()
+    - [Manager View]()
+    - [Supervisor View]()
+  - [License]()
+
+## Getting Started with Bamazon
 
 This application uses the following packages:
   - mysql
   - inquirer
   - cli-table
-  
 
-This application uses a sql server to store data. After downloading/cloning this repo, make sure to run the schema, bamazon.sql, from your command line to create the necessary database and tables to use with the application. There are values in the schema that will be inserted into the database to get you started.
+First, clone the repo to your folder. Navigate to the repo in your terminal and run:
 
-#### Video Demo
+```
+$ npm install mysql inquirer cli-table --save
+```
+
+## Video Demo
 Follow the link below to watch a video guide on how to use this application.
 
 [Demo Link to Youtube](https://www.youtube.com/watch?v=p3E1MxNsCbU&feature=youtu.be)
 
 (for best quality, make sure to set to 720p or 1080p, otherwise the text becomes very hard to read)
 
-## Customer View
+## Program Walkthrough
+Here we will walk through what each view of the program should look like when the program is active.
+
+### Customer View
 To begin the program with the customer view, type `node bamazonCustomer.js` into terminal. You should be presented with a table of current products and a prompt.
 
 ![customer-prompt](https://github.com/zdurham/bamazon/blob/master/img/customer-prompt-snippet.png)
@@ -42,7 +57,7 @@ If your request does exceed the stock, the transaction will not complete, and yo
 
 To exit the program, select the exit option in the main menu prompt.
 
-## Manager View
+### Manager View
 To begin the program with the manager view, type `node bamazonManager.js` into the terminal. The prompt that comes up will look like this:
 
 ![manager prompt](https://github.com/zdurham/bamazon/blob/master/img/manager-prompt1.png)
@@ -82,4 +97,5 @@ Here is an example of a completed prompt for "Create Department" with the succes
 
 ![create-department](https://github.com/zdurham/bamazon/blob/master/img/create-department.png)
 
-
+### License
+This project is licensed under the MIT License
