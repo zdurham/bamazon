@@ -9,26 +9,37 @@ Bamazon is an interactive command-line-interface shopping application. It has th
   - **Supervisor View**
 
 ## Table of Contents
-  - [Getting Started]()
-  - [Video Demo]()
-  - [Program Walkthrough]()
-    - [Customer View]()
-    - [Manager View]()
-    - [Supervisor View]()
-  - [License]()
+  - [Getting Started](https://github.com/zdurham/bamazon#getting-started)
+  - [Video Demo](https://github.com/zdurham/bamazon#video-demo)
+  - [Program Walkthrough](https://github.com/zdurham/bamazon#program-walkthrough)
+    - [Customer View](https://github.com/zdurham/bamazon#customer-view)
+    - [Manager View](https://github.com/zdurham/bamazon#manager-view)
+    - [Supervisor View](https://github.com/zdurham/bamazon#supervisor-view)
+  - [License](https://github.com/zdurham/bamazon#license)
 
-## Getting Started with Bamazon
+## Getting Started
+To get bamazon up and running, you'll need to clone the repo, install dependencies, and set up your database. This can be accomplished quickly and easily.
 
-This application uses the following packages:
-  - mysql
-  - inquirer
-  - cli-table
-
-First, clone the repo to your folder. Navigate to the repo in your terminal and run:
+First, clone the repo to your local folder. Navigate to the repo in your console and run the following code to install dependencies:
 
 ```
 $ npm install mysql inquirer cli-table --save
 ```
+
+Here, we're only using the mysql npm package, cli-table for displays, and inquirier for the cli interface.
+
+Next, we'll need to set up the database. We can do this by simply running the following code in the console:
+```
+$ mysql -u `your username` -p `password if you have one` < bamazon.sql
+```
+
+This should create a database ```bamazon``` and enter tables from the schema.
+
+Now that the database has been created, you'll need to alter the database credentials in  
+
+
+
+
 
 ## Video Demo
 Follow the link below to watch a video guide on how to use this application.
@@ -98,4 +109,4 @@ Here is an example of a completed prompt for "Create Department" with the succes
 ![create-department](https://github.com/zdurham/bamazon/blob/master/img/create-department.png)
 
 ### License
-This project is licensed under the MIT License
+This project is licensed under the [MIT License](https://github.com/zdurham/bamazon/blob/master/LICENSE)
