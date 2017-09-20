@@ -7,7 +7,7 @@ let Table = require('cli-table')
 var connection = mysql.createConnection({
   host: "localhost",
   port: 3306,
-  user: "codingbootcamp",
+  user: "root",
   database: "bamazon"
 })
 // Function to establish connection to the database
