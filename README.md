@@ -35,11 +35,22 @@ $ mysql -u `your username` -p `password if you have one` < bamazon.sql
 
 This should create a database ```bamazon``` and enter tables from the schema.
 
-Now that the database has been created, you'll need to alter the database credentials in  
+Now that the database has been created, you'll need to alter the database credentials in ```database.js```
+```
+const mysql = require('mysql')
 
+module.exports = mysql.createConnection({
+  host: "localhost",
+  port: 3306,
+  user: "codingbootcamp", // Change this line to your user
+  //password: "your password" If you have a password for your database access
+  database: "bamazon"
+})
+```
 
+Simply change the user and password fields (you can omit the password if you do not have one) to your local machine's configuration.
 
-
+Once you have completed this step, you are all set to begin using the application!
 
 ## Video Demo
 Follow the link below to watch a video guide on how to use this application.
@@ -52,7 +63,7 @@ Follow the link below to watch a video guide on how to use this application.
 Here we will walk through what each view of the program should look like when the program is active.
 
 ### Customer View
-To begin the program with the customer view, type `node bamazonCustomer.js` into terminal. You should be presented with a table of current products and a prompt.
+To begin the program with the customer view, type `node bamazonCustomer.js` into the console. You should be presented with a table of current products and a prompt.
 
 ![customer-prompt](https://github.com/zdurham/bamazon/blob/master/img/customer-prompt-snippet.png)
 
@@ -69,7 +80,7 @@ If your request does exceed the stock, the transaction will not complete, and yo
 To exit the program, select the exit option in the main menu prompt.
 
 ### Manager View
-To begin the program with the manager view, type `node bamazonManager.js` into the terminal. The prompt that comes up will look like this:
+To begin the program with the manager view, type `node bamazonManager.js` into the console. The prompt that comes up will look like this:
 
 ![manager prompt](https://github.com/zdurham/bamazon/blob/master/img/manager-prompt1.png)
 
@@ -89,8 +100,8 @@ To add a brand new product to the list of currently available products, select t
 
 Like with the other options, the user is sent back to the main menu at the end of the action.
  
-## Supervisor View
-To begin the program with the supervisor view, type `node bamazonSupervisor.js` into the terminal.
+### Supervisor View
+To begin the program with the supervisor view, type `node bamazonSupervisor.js` into the console.
 
 The initial prompt should look like this: 
 
