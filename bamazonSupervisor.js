@@ -3,17 +3,11 @@ const inquirer = require('inquirer');
 let Table = require('cli-table')
 
 // Database credentials
-var connection = mysql.createConnection({
-  host: "localhost",
-  port: 3306,
-  user: "codingbootcamp",
-  database: "bamazon"
-})
-
+const connection = require('./database.js')
+// Function to establish connection to the database
 connection.connect(function(err) {
   if (err) throw err;
-  
-  // Initial prompt asking manager what to do
+  // Use a query to get database information, and then display it in an aesthetically pleasing way
   menu();
 })
 

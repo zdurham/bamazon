@@ -4,12 +4,7 @@ let Table = require('cli-table')
 
 
 // Database credentials
-var connection = mysql.createConnection({
-  host: "localhost",
-  port: 3306,
-  user: "root",
-  database: "bamazon"
-})
+const connection = require('./database.js')
 // Function to establish connection to the database
 connection.connect(function(err) {
   if (err) throw err;
